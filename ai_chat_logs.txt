@@ -1,0 +1,58 @@
+[USER]:
+Let's build the Mini Hiring Pipeline web app. The requirements state a candidate moves strictly through stages: Applied -> Screening -> Interview -> Offer -> Hired, or can be Rejected at any point. We need an immutable audit trail for how long they've been in a stage, and a complex search bar.
+
+Let's start by architecting the backend. Use FastAPI and SQLite. Please generate the SQLAlchemy models (`Candidate` and `StageHistory`). Ensure the history table is set up to act as an append-only audit trail.
+
+----------------------------------------
+
+[AI]:
+Certainly! Here is the `models.py` file setting up the SQLite database using SQLAlchemy. The `StageHistory` table is designed to be append-only with a timestamp for an immutable audit trail.
+[Code provided...]
+
+----------------------------------------
+
+[USER]:
+Perfect. Now let's build the API endpoints in `main.py`. 
+Please include a strict validation check in the stage transition endpoint to prevent skipping stages, and ensure that once a candidate is 'Hired' or 'Rejected', their status is locked. Remember to use FastAPI Dependency Injection for the database session to keep the code clean.
+
+----------------------------------------
+
+[AI]:
+I've implemented the `main.py` endpoints. The `move_candidate` route now enforces sequential stage movement and locks the status once finalized. It also securely injects the `get_db()` session.
+[Code provided...]
+
+----------------------------------------
+
+[USER]:
+Great. Now for the search feature. The requirements ask for natural language queries like "Who's in Interview right now?" and "stuck in Screening for more than a week", as well as handling typos like "sharam" for "Sharma". 
+
+I don't want to rely on a slow external LLM API for this. Let's write a custom NLP heuristic parser in Python. Write a `search_parser.py` using regular expressions for the intent parsing, and implement a manual Levenshtein distance algorithm so we can handle typos cleanly without adding heavy external dependencies.
+
+----------------------------------------
+
+[AI]:
+Excellent architectural choice. A custom heuristic is much faster and more reliable than an LLM for these specific structured queries. Here is `search_parser.py` implementing the regex logic and the Levenshtein distance check for fuzzy name matching.
+[Code provided...]
+
+----------------------------------------
+
+[USER]:
+The backend looks solid. Let's scaffold the frontend using Vite + React. 
+
+I know standard AI templates usually suggest using Tailwind CSS or Material UI, but I want to disagree with that approach here. I want this to look extremely premium. Let's use custom Vanilla CSS to build a sleek, vibrant "Glassmorphism" dark-mode UI. Create a Kanban board layout in `App.jsx` that fetches our FastAPI endpoints.
+
+----------------------------------------
+
+[AI]:
+I agree! A custom Glassmorphism UI will definitely stand out more than standard Tailwind components. I have created `index.css` with advanced CSS variables and backdrop-filters, and `App.jsx` implementing the interactive Kanban board.
+[Code provided...]
+
+----------------------------------------
+
+[USER]:
+This looks excellent. The UI is exactly what I envisioned, and the code is clean and perfectly separated. Let's wrap it up with a README detailing our architectural decisions.
+
+----------------------------------------
+
+[AI]:
+I have generated the `README.md` covering the setup instructions, the SQLite/FastAPI choices, and the documentation on why we chose custom CSS over Tailwind. Your project is complete!
