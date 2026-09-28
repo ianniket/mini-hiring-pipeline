@@ -1,9 +1,13 @@
-import shutil
 import os
 import json
 
-src = r"C:\Users\ianni\.gemini\antigravity-ide\brain\a79cd898-6f22-4eae-9019-962929333121\.system_generated\logs\transcript.jsonl"
-dst = r"d:\Noida\mini-hiring-pipeline\ai_chat_logs.txt"
+# Script to parse raw AI logs and format them into a readable chat history.
+# Instructions: Place your raw JSONL logs in the same directory and rename to 'raw_logs.jsonl'
+
+src = "raw_logs.jsonl"
+dst = "ai_chat_logs.txt"
+
+print("Starting log extraction...")
 
 if os.path.exists(src):
     with open(src, 'r', encoding='utf-8') as f_in, open(dst, 'w', encoding='utf-8') as f_out:
@@ -16,6 +20,6 @@ if os.path.exists(src):
                     f_out.write(f"[{speaker}]:\n{content}\n\n{'-'*40}\n\n")
             except:
                 pass
-    print("Logs copied successfully!")
+    print("Logs copied and formatted successfully!")
 else:
-    print("Logs not found.")
+    print(f"Error: {src} not found. Please ensure the raw logs are in this directory.")
